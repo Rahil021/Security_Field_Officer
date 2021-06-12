@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Security Field Officer</string>
+
+    <string name="header1">https://prolonged-lake.000webhostapp.com/WhereIsMyBus/</string>
+    <string name="header">https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/</string>
+<!-- https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/user_login.php?sfo_id=1234-->
+
 </resources>

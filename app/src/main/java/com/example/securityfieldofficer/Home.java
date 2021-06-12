@@ -3,11 +3,15 @@ package com.example.securityfieldofficer;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 
@@ -15,6 +19,7 @@ public class Home extends AppCompatActivity {
 
     MaterialCardView visit_planned,save_location;
     ImageView logout_btn;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,30 @@ public class Home extends AppCompatActivity {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                builder.setTitle("Logout...")
+                        .setMessage("Are you sure you want to logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                sp.edit().putBoolean("logged",false).apply();
+                                startActivity(new Intent(Home.this,Login.class));
+                                finish();
+
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 

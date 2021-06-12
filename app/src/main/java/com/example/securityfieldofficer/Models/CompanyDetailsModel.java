@@ -4,6 +4,7 @@ public class CompanyDetailsModel {
 
     String company_name,company_city;
     Integer visit_done;
+    Integer visit_id;
 
     public CompanyDetailsModel(){
 
@@ -13,6 +14,14 @@ public class CompanyDetailsModel {
         this.company_name = company_name;
         this.company_city = company_city;
         this.visit_done = visit_done;
+    }
+
+    public Integer getVisit_id() {
+        return visit_id;
+    }
+
+    public void setVisit_id(Integer visit_id) {
+        this.visit_id = visit_id;
     }
 
     public String getCompany_name() {

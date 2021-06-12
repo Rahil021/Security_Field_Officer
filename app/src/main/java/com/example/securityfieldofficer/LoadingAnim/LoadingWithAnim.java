@@ -25,7 +25,11 @@ public class LoadingWithAnim {
     public LoadingWithAnim(Activity myactivity){
         this.activity = myactivity;
         i = 1;
+    }
 
+    public LoadingWithAnim(Activity myactivity,Integer id){
+        this.activity = myactivity;
+        i = id;
     }
 
 
@@ -34,7 +38,15 @@ public class LoadingWithAnim {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             LayoutInflater inflater = activity.getLayoutInflater();
-            builder.setView(inflater.inflate(R.layout.fetching_progress_bar, null));
+            builder.setView(inflater.inflate(R.layout.fetching_coordinates_progress_bar, null));
+            builder.setCancelable(false);
+
+            alertDialog = builder.create();
+            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }else if(i == 2){
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            LayoutInflater inflater = activity.getLayoutInflater();
+            builder.setView(inflater.inflate(R.layout.loading_progress_bar, null));
             builder.setCancelable(false);
 
             alertDialog = builder.create();
