@@ -3,6 +3,7 @@ package com.example.securityfieldofficer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class Visit_Planned extends AppCompatActivity {
     LoadingWithAnim loadingDialog;
     List<CompanyDetailsModel> model;
     TextView no_visits_planned,no_visits_planned2;
+    SwipeRefreshLayout swipe_refresh;
 
 
     @Override
@@ -68,6 +70,7 @@ public class Visit_Planned extends AppCompatActivity {
 
         no_visits_planned = findViewById(R.id.no_visits_planned);
         no_visits_planned2 = findViewById(R.id.no_visits_planned2);
+        swipe_refresh = findViewById(R.id.swipe_refresh);
 
         /*list.add(new CompanyDetailsModel("Hridhil Thakkar","Manjalpur,Vadodara",1));
         list.add(new CompanyDetailsModel("Rahil Thakkar","Manjalpur,Vadodara",0));
@@ -85,15 +88,26 @@ public class Visit_Planned extends AppCompatActivity {
             }
         });
 
-        retrieve();
+        retrieve(false);
+
+        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                retrieve(true);
+            }
+        });
+
     }
 
-    public void retrieve(){
+    public void retrieve(Boolean refresh){
 
         {
             retrieve_url = header+"visit_planned.php?sfo_id="+sfo_id;
             Log.v("Login",""+retrieve_url);
-            loadingDialog.startLoadingDialog();
+
+            if(!refresh){
+                loadingDialog.startLoadingDialog();
+            }
             executorService.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -140,7 +154,11 @@ public class Visit_Planned extends AppCompatActivity {
                                 recyclerView.setAdapter(myAdapter);
                             }
 
-                            loadingDialog.dismissDialog();
+                            if(!refresh){
+                                loadingDialog.dismissDialog();
+                            }else{
+                                swipe_refresh.setRefreshing(false);
+                            }
 
                         }
                     });

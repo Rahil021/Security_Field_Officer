@@ -157,12 +157,6 @@ public class LocationDemo extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    public void find(View v) {
-        getlocation();
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.P)
     public boolean  LocationEnabled(){
 
         LocationManager locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
@@ -173,4 +167,8 @@ public class LocationDemo extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public void find(View v) {
+        getlocation();
+    }
 }

@@ -65,7 +65,6 @@ public class Save_Location extends AppCompatActivity {
 
     final ExecutorService executorService = Executors.newSingleThreadExecutor();
     Spinner spinner;
-    SpinnerAdapter myAdapter;
     List<CompanyDetailsModel> list;
     Button fetch_button, save_button;
     TextView your_coordinates_tv;
@@ -74,7 +73,6 @@ public class Save_Location extends AppCompatActivity {
     String result;
     String sfo_id;
     LoadingWithAnim loadingDialog,loadingForRetrieve;
-    List<CompanyDetailsModel> model;
     TextView your_address_output;
     FusedLocationProviderClient fusedLocationProviderClient;
     TextView no_visits_planned,no_visits_planned2;
@@ -159,26 +157,13 @@ public class Save_Location extends AppCompatActivity {
         });
 
 
-//        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//        boolean enabled = service
-//                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-//        // check if enabled and if not send user to the GSP settings
-//        // Better solution would be to display a dialog and suggesting to
-//        // go to the settings
-//        if (!enabled) {
-//            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//            startActivity(intent);
-//        }
-
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         fetch_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //loadingWithAnim.startLoadingDialog();  StopLoading();
-                save_button.setVisibility(View.VISIBLE);
+                getlocation();
             }
         });
 
@@ -292,12 +277,150 @@ public class Save_Location extends AppCompatActivity {
             @Override
             public void run() {
                 Toast.makeText(Save_Location.this, "Location Saved Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Save_Location.this, Save_Location.class));
                 finish();
                 loadingForRetrieve.dismissDialog();
+                overridePendingTransition(0,0);
+                startActivity(getIntent());
+                overridePendingTransition(0,0);
+
             }
         });
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    private void getlocation() {
+
+        if (checkPermission()) {
+
+            if (LocationEnabled()) {
+
+                loadingDialog.startLoadingDialog();
+
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null){
+                            location.getLongitude();
+                            location.getLatitude();
+
+                            your_coordinates_tv.setText(""+location.getLatitude());
+                            your_address_output.setText(""+location.getLongitude());
+
+                            str_latitude = String.valueOf(location.getLatitude());
+                            str_longitude = String.valueOf(location.getLongitude());
+
+                            your_coordinates_tv.setVisibility(View.VISIBLE);
+                            your_address_output.setVisibility(View.VISIBLE);
+
+                            loadingDialog.dismissDialog();
+                            fetch_button.setVisibility(View.GONE);
+                            save_button.setVisibility(View.VISIBLE);
+
+                        }
+                        else {
+
+                            requestLocation();
+
+                        }
+                    }
+                });
+            }
+            else{
+                Toast.makeText(this, "Please Turn On Your GPS", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            requestPermissions();
+        }
+    }
+
+    private void requestLocation() {
+
+        LocationRequest request  = LocationRequest.create();
+        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        request.setFastestInterval(1000);
+        request.setInterval(5000);
+        checkPermission();
+        fusedLocationProviderClient.requestLocationUpdates(request,callback, Looper.myLooper());
+    }
+
+    LocationCallback callback = new LocationCallback() {
+        @Override
+        public void onLocationResult(@NonNull LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+            if (locationResult != null){
+                Location location = locationResult.getLastLocation();
+
+                Context context;
+                Geocoder geocoder = new Geocoder(Save_Location.this, Locale.getDefault());
+                try {
+                    List<Address> req_addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                    String address = req_addresses.get(0).getAddressLine(0);
+
+                    your_coordinates_tv.setText(""+location.getLatitude()+" "+location.getLongitude());
+                    your_address_output.setText(""+address);
+
+                    your_coordinates_tv.setVisibility(View.VISIBLE);
+                    your_address_output.setVisibility(View.VISIBLE);
+
+                    str_latitude = String.valueOf(location.getLatitude());
+                    str_longitude = String.valueOf(location.getLongitude());
+
+                    loadingDialog.dismissDialog();
+                    fetch_button.setVisibility(View.GONE);
+                    save_button.setVisibility(View.VISIBLE);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    public boolean checkPermission(){
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private void requestPermissions(){
+
+        ActivityCompat.requestPermissions(this,new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        },3);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==3 && grantResults.length>0){
+
+            getlocation();
+        }
+
+        else {
+            Toast.makeText(this, "Please provide permission", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public boolean  LocationEnabled(){
+
+        LocationManager locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        if(locationManager.isLocationEnabled()) {
+            return true;
+        } else{
+            return false;
+        }
     }
 
 }

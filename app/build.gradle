@@ -48,4 +48,7 @@ dependencies {
     //Lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //swipe down to refresh lib
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }
