@@ -237,6 +237,10 @@ public class Save_Location extends AppCompatActivity {
                                 spinner.setVisibility(View.GONE);
                             }else{
 
+                                no_visits_planned.setVisibility(View.GONE);
+                                no_visits_planned2.setVisibility(View.GONE);
+                                spinner.setVisibility(View.VISIBLE);
+
                                 SpinnerAdapter spinnerAdapter = new SpinnerAdapter(Save_Location.this,R.layout.drop_down,list);
                                 spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_item);
                                 spinner.setAdapter(spinnerAdapter);

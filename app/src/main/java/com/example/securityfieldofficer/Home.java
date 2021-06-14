@@ -26,7 +26,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.blue_black, this.getTheme()));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -56,14 +55,18 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setTitle("Logout...")
+                builder.setTitle("Logout")
                         .setMessage("Are you sure you want to logout?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                sp.edit().putBoolean("logged",false).apply();
+                                sp = getSharedPreferences("login",MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.clear();
+                                editor.apply();
+                                //sp.edit().putBoolean("logged",false).apply();
                                 startActivity(new Intent(Home.this,Login.class));
                                 finish();
 

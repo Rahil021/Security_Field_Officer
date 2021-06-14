@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity {
                                     //write your UI part here....
                                     if (edt_username.getText().toString().equals(customer_username) && edt_password.getText().toString().equals(customer_password))
                                     {
-                                        Toast.makeText(Login.this, " Login sucessful... ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, " Login Sucessful!!", Toast.LENGTH_SHORT).show();
                                         loadingDialog.dismissDialog();
                                         Intent intent = new Intent(Login.this, Home.class);
 
@@ -144,7 +144,7 @@ public class Login extends AppCompatActivity {
                                     }
                                     else{
                                         loadingDialog.dismissDialog();
-                                        Toast.makeText(Login.this, " Email or Password is incorrect!! ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, " Email or Password is Incorrect!! ", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

@@ -70,7 +70,6 @@ public class LocationDemo extends AppCompatActivity {
 
                             lat.setText(""+location.getLatitude());
                             longitiude.setText(""+location.getLongitude());
-
                         }
                         else {
 

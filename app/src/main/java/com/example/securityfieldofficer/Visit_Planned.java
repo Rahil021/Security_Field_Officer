@@ -149,6 +149,10 @@ public class Visit_Planned extends AppCompatActivity {
                                 no_visits_planned.setVisibility(View.VISIBLE);
                                 no_visits_planned2.setVisibility(View.VISIBLE);
                             }else {
+
+                                no_visits_planned.setVisibility(View.GONE);
+                                no_visits_planned2.setVisibility(View.GONE);
+
                                 myAdapter = new PlannedVisitsAdapter(Visit_Planned.this, model);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(Visit_Planned.this));
                                 recyclerView.setAdapter(myAdapter);
