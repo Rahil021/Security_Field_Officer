@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
 
     ArrayList<Login_pojo> model;
 
-    String username,password;
+    String username,password,name,image_url;
     String login_url;
     String result;
 
@@ -100,10 +100,15 @@ public class Login extends AppCompatActivity {
 
                                     p.setUsername(jsonObject11.getString("sfo_id"));
                                     p.setPassword(jsonObject11.getString("password"));
+                                    p.setName(jsonObject11.getString("name"));
+                                    p.setImage_url(jsonObject11.getString("image_url"));
                                     model.add(p);
 
                                     customer_username = p.getUsername();
                                     customer_password = p.getPassword();
+
+                                    name = p.getName();
+                                    image_url = p.getImage_url();
 
                                     Log.v("username","id: "+username +" pass: "+password);
                                     Log.v("customer_username","id: "+customer_username +" pass: "+customer_password);
@@ -133,13 +138,18 @@ public class Login extends AppCompatActivity {
                                         editor = mSharedPreferences.edit();
                                         editor.putString("email_id",edt_username.getText().toString());
                                         editor.putString("password",edt_password.getText().toString());
+                                        editor.putString("name",""+name);
+                                        editor.putString("image_url",""+image_url);
                                         editor.commit();
 
                                         mSP.edit().putBoolean("logged",true).apply();
                                         mSP.edit().putString("SFO_ID",edt_username.getText().toString()).apply();
+                                        mSP.edit().putString("name",name).apply();
+                                        mSP.edit().putString("image_url",image_url).apply();
 
                                         Log.d("sucess",""+customer_password);
                                         Log.d("sucess",""+customer_username);
+                                        Log.d("sucess",""+name);
 
                                     }
                                     else{

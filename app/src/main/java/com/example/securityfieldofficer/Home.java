@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
@@ -21,10 +22,16 @@ public class Home extends AppCompatActivity {
     ImageView logout_btn;
     SharedPreferences sp;
 
+    TextView name_tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        String name = sp.getString("name","Zukerberg");
+        String image_url = sp.getString("image_url","");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.blue_black, this.getTheme()));
@@ -35,6 +42,9 @@ public class Home extends AppCompatActivity {
         visit_planned = findViewById(R.id.visits_planned_cardView);
         save_location = findViewById(R.id.save_visited_locations_cardView);
         logout_btn = findViewById(R.id.logout_btn);
+        name_tv = findViewById(R.id.name);
+
+        name_tv.setText("Mr. "+name);
 
         visit_planned.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +72,6 @@ public class Home extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                sp = getSharedPreferences("login",MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.clear();
                                 editor.apply();
