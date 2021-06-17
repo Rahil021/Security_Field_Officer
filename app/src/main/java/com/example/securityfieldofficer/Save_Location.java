@@ -78,7 +78,7 @@ public class Save_Location extends AppCompatActivity {
     TextView no_visits_planned,no_visits_planned2;
 
     Integer visit_id;
-    String str_latitude="22",str_longitude="22";
+    String str_latitude="0",str_longitude="0";
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -171,21 +171,21 @@ public class Save_Location extends AppCompatActivity {
 
     }
 
-    public void StopLoading() {
-        final Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //oadingWithAnim.dismissDialog();
-                save_button.setVisibility(View.VISIBLE);
-                fetch_button.setVisibility(View.GONE);
-                your_coordinates_tv.setVisibility(View.VISIBLE);
-                your_address_output.setVisibility(View.VISIBLE);
-                spinner.setEnabled(false);
-                h.postDelayed(this, 5000);
-            }
-        }, 5000);
-    }
+//    public void StopLoading() {
+//        final Handler h = new Handler();
+//        h.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                //oadingWithAnim.dismissDialog();
+//                save_button.setVisibility(View.VISIBLE);
+//                fetch_button.setVisibility(View.GONE);
+//                your_coordinates_tv.setVisibility(View.VISIBLE);
+//                your_address_output.setVisibility(View.VISIBLE);
+//                spinner.setEnabled(false);
+//                h.postDelayed(this, 5000);
+//            }
+//        }, 5000);
+//    }
 
     public void retrieve(){
 
