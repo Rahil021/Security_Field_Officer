@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Security Field Officer</string>
+<!--    <string name="app_name">Security Field Officer</string>-->
 
-    <string name="header">https://trackingsfo.herokuapp.com/</string>
-    <string name="header1">https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/</string>
-<!-- https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/user_login.php?sfo_id=1234-->
+    <string name="app_name">DSS</string>
+    <string name="header1">https://trackingsfo.herokuapp.com/</string>
+    <string name="header">https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/</string>
+    <!-- https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/user_login.php?sfo_id=1234-->
 
 </resources>

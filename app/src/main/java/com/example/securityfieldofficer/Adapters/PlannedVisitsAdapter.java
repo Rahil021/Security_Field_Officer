@@ -49,6 +49,8 @@ public class PlannedVisitsAdapter extends RecyclerView.Adapter<PlannedVisitsAdap
             holder.constraintLayout_recyler_view.setBackgroundColor(context.getResources().getColor(R.color.d_green));
         }else if(list.get(position).getVisit_done() == 0){
             //holder.visit_status_img.setImageDrawable(context.getResources().getDrawable(R.drawable.no));
+        }else if(list.get(position).getVisit_done() == 2){
+            holder.constraintLayout_recyler_view.setBackgroundColor(context.getResources().getColor(R.color.d_blue));
         }
 
         Log.v("PlannedVisitsAdapter","Company name: "+list.get(position).getCompany_name());

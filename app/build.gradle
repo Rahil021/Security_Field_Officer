@@ -51,4 +51,7 @@ dependencies {
 
     //swipe down to refresh lib
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
 }

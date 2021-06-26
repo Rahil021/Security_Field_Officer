@@ -27,4 +27,9 @@
         <item name="cornerSizeBottomLeft">25dp</item>
     </style>
 
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#E81123</item>
+        <item name="boxStrokeWidth">10dp</item>
+    </style>
+
 </resources>

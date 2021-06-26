@@ -18,7 +18,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class Home extends AppCompatActivity {
 
-    MaterialCardView visit_planned,save_location;
+    MaterialCardView visit_planned,save_location,unplanned_visits;
     ImageView logout_btn;
     SharedPreferences sp;
 
@@ -41,6 +41,7 @@ public class Home extends AppCompatActivity {
 
         visit_planned = findViewById(R.id.visits_planned_cardView);
         save_location = findViewById(R.id.save_visited_locations_cardView);
+        unplanned_visits = findViewById(R.id.unplanned_visits_cardview);
         logout_btn = findViewById(R.id.logout_btn);
         name_tv = findViewById(R.id.name);
 
@@ -57,6 +58,13 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Home.this,Save_Location.class));
+            }
+        });
+
+        unplanned_visits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this,Unplanned_Visits.class));
             }
         });
 

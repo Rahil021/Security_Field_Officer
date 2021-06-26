@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Save_Location">
+    tools:context=".Unplanned_Visits">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/save_visited_locations_cardView"
-        style="@style/CustomCardViewStyle"
+        android:id="@+id/visits_planned_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:cardCornerRadius="0dp"
         app:cardElevation="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,14 +48,14 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/save_visited"
+                android:id="@+id/visits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:fontFamily="@font/roboto_light"
-                android:gravity="center"
-                android:text="Save Visited"
+                android:gravity="bottom"
+                android:text="Unplanned"
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -64,24 +64,21 @@
                 app:layout_constraintVertical_bias="0.424" />
 
             <TextView
-                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto_bold"
-                android:gravity="left"
-                android:text="Locations"
+                android:text="Visits"
                 android:textColor="@color/white"
                 android:textSize="30dp"
-                app:layout_constraintStart_toStartOf="@+id/save_visited"
-                app:layout_constraintTop_toBottomOf="@+id/save_visited" />
+                app:layout_constraintStart_toStartOf="@+id/visits"
+                app:layout_constraintTop_toBottomOf="@+id/visits" />
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginRight="25dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/save_visited_location_img"
+                android:layout_height="match_parent"
+                android:layout_marginRight="35dp"
+                android:src="@drawable/unplanned_visits_img"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -94,65 +91,79 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="54dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="center"
-        android:src="@drawable/save_location"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/add_unplanned_location"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/save_visited_locations_cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/visits_planned_cardView" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
         android:fontFamily="@font/roboto_light"
-        android:text="Save Locations"
+        android:text="Add an Unplanned Visit"
         android:textColor="@color/blue_black"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/spinner_background"
-        android:padding="0dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:startIconDrawable="@drawable/ic_login_username_24">
 
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unplanned_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_regular"
+            android:hint="Company Name"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            app:errorEnabled="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField_pass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/filledTextField_username"
+        app:startIconDrawable="@drawable/ic_login_password_24">
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unplanned_company_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company Area/City"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            app:errorEnabled="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fetch_button"
-        android:layout_width="0dp"
-        android:layout_height="8dp"
-        android:layout_marginBottom="28dp"
-        android:background="@drawable/login_btn_shape"
-        android:elevation="20dp"
-        android:fontFamily="@font/roboto_light"
-        android:paddingHorizontal="35dp"
-        android:paddingVertical="10dp"
-        android:text="Fetch Location"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:visibility="gone"
-        app:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/save_button"
+        android:id="@+id/unplanned_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
@@ -171,25 +182,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/unplanned_fetch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/login_btn_shape"
+        android:text="Fetch Location"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:elevation="20dp"
+        android:visibility="visible"
+        android:paddingHorizontal="35dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/black"
+        android:fontFamily="@font/roboto_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <TextView
-        android:id="@+id/your_coordinates_tv"
+        android:id="@+id/unplanned_your_coordinates_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="Your Address"
         android:textColor="@color/blue_black"
         android:textSize="20dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/unplanned_fetch_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.302">
+        app:layout_constraintTop_toBottomOf="@+id/filledTextField_pass"
+        app:layout_constraintVertical_bias="0.342">
 
     </TextView>
 
     <TextView
-        android:id="@+id/your_address_output"
+        android:id="@+id/unplanned_your_address_output"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_light"
@@ -199,48 +231,13 @@
         android:textColor="@color/blue_black"
         android:textSize="18dp"
         android:layout_marginTop="5dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/your_coordinates_tv">
+        app:layout_constraintTop_toBottomOf="@+id/unplanned_your_coordinates_tv">
 
     </TextView>
 
-    <TextView
-        android:id="@+id/no_visits_planned"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_medium"
-        android:text="No visits planned yet"
-        android:textColor="@color/blue_black"
-        android:textSize="18dp"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.43" />
-
-    <TextView
-        android:id="@+id/no_visits_planned2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_light"
-        android:singleLine="false"
-        android:layout_marginHorizontal="15dp"
-        android:paddingHorizontal="20dp"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="Contact your head supervisor for any queries."
-        android:textColor="@color/blue_black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_visits_planned" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

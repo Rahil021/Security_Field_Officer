@@ -55,6 +55,8 @@ public class SpinnerAdapter extends ArrayAdapter<CompanyDetailsModel> {
             drop_down_constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.d_green));
         }else if(list.get(position).getVisit_done() == 0){
             //visit_status_img.setImageDrawable(context.getResources().getDrawable(R.drawable.no));
+        }else if(list.get(position).getVisit_done() == 2){
+            drop_down_constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.d_blue));
         }else {
             visit_status_img.setImageDrawable(context.getResources().getDrawable(R.drawable.drop_arrow));
             visit_status_img.setVisibility(View.VISIBLE);
@@ -85,6 +87,8 @@ public class SpinnerAdapter extends ArrayAdapter<CompanyDetailsModel> {
             simple_spinner_item_constrain_layout.setBackgroundColor(context.getResources().getColor(R.color.d_green));
         }else if(list.get(position).getVisit_done() == 0){
            // visit_status_img.setImageDrawable(context.getResources().getDrawable(R.drawable.no));
+        }else if(list.get(position).getVisit_done() == 2){
+            simple_spinner_item_constrain_layout.setBackgroundColor(context.getResources().getColor(R.color.d_blue));
         }else {
             visit_status_img.setVisibility(View.VISIBLE);
            // company_city.setVisibility(View.GONE);
