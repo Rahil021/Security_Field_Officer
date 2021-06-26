@@ -182,10 +182,7 @@ public class Unplanned_Visits extends AppCompatActivity {
                 }
             });
 
-
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void getlocation() {
