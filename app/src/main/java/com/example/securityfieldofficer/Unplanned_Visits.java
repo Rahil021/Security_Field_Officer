@@ -110,7 +110,12 @@ public class Unplanned_Visits extends AppCompatActivity {
                 }else if(company_city.getText().length()==0){
                     company_city.setError("Company City can't be empty");
                 }else{
-                    getlocation();
+
+                    if(checkInternet()){
+                        getlocation();
+                    }else{
+                        Toast.makeText(Unplanned_Visits.this, "No Internet", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -120,7 +125,11 @@ public class Unplanned_Visits extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                add_visit();
+                if(checkInternet()){
+                    add_visit();
+                }else {
+                    Toast.makeText(Unplanned_Visits.this, "No Internet", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -133,8 +142,6 @@ public class Unplanned_Visits extends AppCompatActivity {
         });
 
     }
-
-    //https://tourist-seed.000webhostapp.com/SFO/AndroidPHP/save_location.php?sfo_id=44&visit_id=7&latitude=12.0000&longitude=23.0000
 
     public void add_visit(){
 
@@ -356,4 +363,18 @@ public class Unplanned_Visits extends AppCompatActivity {
         }
 
     }
+
+    Boolean checkInternet() {
+
+        NoInternet obj = new NoInternet();
+
+        if (obj.isNetworkAvailable(Unplanned_Visits.this)) {
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -145,7 +145,13 @@ public class Save_Location extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update();
+
+                if(checkInternet()){
+                    update();
+                }else {
+                    Toast.makeText(Save_Location.this, "No Internet", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -162,8 +168,12 @@ public class Save_Location extends AppCompatActivity {
         fetch_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //loadingWithAnim.startLoadingDialog();  StopLoading();
-                getlocation();
+
+                if(checkInternet()){
+                    getlocation();
+                }else {
+                    Toast.makeText(Save_Location.this, "No Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -171,21 +181,7 @@ public class Save_Location extends AppCompatActivity {
 
     }
 
-//    public void StopLoading() {
-//        final Handler h = new Handler();
-//        h.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //oadingWithAnim.dismissDialog();
-//                save_button.setVisibility(View.VISIBLE);
-//                fetch_button.setVisibility(View.GONE);
-//                your_coordinates_tv.setVisibility(View.VISIBLE);
-//                your_address_output.setVisibility(View.VISIBLE);
-//                spinner.setEnabled(false);
-//                h.postDelayed(this, 5000);
-//            }
-//        }, 5000);
-//    }
+
 
     public void retrieve(){
 
@@ -423,6 +419,19 @@ public class Save_Location extends AppCompatActivity {
         if(locationManager.isLocationEnabled()) {
             return true;
         } else{
+            return false;
+        }
+    }
+
+    Boolean checkInternet() {
+
+        NoInternet obj = new NoInternet();
+
+        if (obj.isNetworkAvailable(Save_Location.this)) {
+
+            return true;
+
+        } else {
             return false;
         }
     }
