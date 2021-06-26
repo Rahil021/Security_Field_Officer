@@ -72,7 +72,6 @@ public class Unplanned_Visits extends AppCompatActivity {
         setContentView(R.layout.unplanned_visits_activity);
         AndroidNetworking.initialize(getApplicationContext());
 
-
         fetch_button = findViewById(R.id.unplanned_fetch_button);
         save_button = findViewById(R.id.unplanned_save_button);
         your_coordinates_tv = findViewById(R.id.unplanned_your_coordinates_tv);
